@@ -1,0 +1,35 @@
+import pygame,sys
+from pygame.locals import QUIT
+
+pygame.init()
+screen = pygame.display.set_mode((600, 600))
+pygame.display.set_caption('Moving Curry!')
+
+screen.fill("green")
+
+img = pygame.image.load("curry.png")
+image = pygame.transform.scale(img, (150,150))
+
+while True:
+
+    screen.blit(image,(400,400))
+
+    font = pygame.font.SysFont("Times New Roman", 35)
+    text = font.render("Stephen Curry", True,(255,234,255))
+    screen.blit(text, (100,100))
+    
+    event = pygame.event.poll()
+    for event in pygame.event.get():
+        if event.type == QUIT:
+
+                pygame.quit()
+                sys.exit()
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        pos = pygame.mouse.get_pos()
+        pygame.draw.circle(screen, "red", (pos), 20)
+        pygame.display.update()
+    elif event.type == pygame.MOUSEBUTTONUP:
+        pos2 = pygame.mouse.get_pos()
+        pygame.draw.line(screen, "red", (pos), (pos2), 7)
+        pygame.draw.circle(screen, "red", (pos2), 20)
+        pygame.display.update()
